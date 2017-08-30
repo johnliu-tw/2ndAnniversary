@@ -1,0 +1,138 @@
+<style>
+.header-card{
+  background-color:#FFE1D0;
+  text-align:center;
+  font-family: 'Baloo Tammudu', cursive;
+  border-width: 2px;
+  margin:5px;
+}
+.back{
+  background-color:#FFE1D0;
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  width: 100vw;
+  z-index: 100;
+  height: 40px;
+  box-shadow: 2px -1px 4px rgba(0, 0, 0, 0.2);
+  text-align:center;
+}
+.card{
+  text-align:center;
+}
+.footer{
+  height:150px;
+}
+body{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #FF4242;
+}
+#map {
+  height: 400px;
+  width: 100%;
+}
+</style>
+<script>
+  $(function(){
+  //hide all section 
+    $("#createStory").hide();
+    $("#storylist").hide();
+    $("#mapMemory").hide();
+  //show and hide section
+    $("#createStoryCard").click(function(){
+      $("#createStory").show();
+      $("#storylist").hide();
+      $("#mapMemory").hide();
+    });
+    $("#storylistCard").click(function(){
+      $("#storylist").show();
+      $("#mapMemory").hide();
+      $("#createStory").hide();
+    });
+    $("#mapMemoryCard").click(function(){
+      $("#mapMemory").show();
+      $("#storylist").hide();
+      $("#createStory").hide();
+    });
+    $(".back").click(function(){
+      $("body").animate({
+			scrollTop: 0
+		}, 1000);
+    })
+  })
+  function initMap() {
+    var uluru= {lat: 24.515, lng: 121.360};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 7,
+      center: uluru
+    });
+    var places = []
+    $.get( "/date_places.json", function( data ) {
+      places = data;
+      for (var i = 0; i < places.length; i++) {
+        var place = places[i];
+        var marker = new google.maps.Marker({
+          position: {lat: parseFloat(place["lat"]), lng: parseFloat(place["lng"])},
+          map: map
+        <%# icon: image,
+        shape: shape,
+        title: beach[0],
+        zIndex: beach[3] %>
+      })
+      }
+    })
+
+  }
+</script>
+
+<div class="container">
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <p id="notice"><%= notice %></p>
+    <h1>Stories</h1>
+  </div>
+  <div id="storylistCard" class="col-md-4 col-xs-4 header-card rounded">
+    Stories list 
+  </div>
+  <div id="createStoryCard" class="col-md-4 col-xs-4 header-card rounded">
+    Create Story
+  </div>
+  <div id="mapMemoryCard"class="col-md-4 col-xs-4 header-card rounded">
+    Story Map
+  </div>
+
+<div id="storylist">
+
+<% @stories.each do |story| %>
+<div class="card" style="margin:10px;background-color:#FFBFB4;">
+    <!--Card image-->
+    <img class="card-img-top" src=<%= story.image %> alt="Card image cap">
+    <!--Card content-->
+    <div class="card-block">
+        <!--Title-->
+        <h4 class="card-title"><%= story.title %></h4>
+        <!--Text-->
+        <p class="card-text"><%= story.description %></p>
+        <p class="card-text"><small class="text-muted">地點：<%= story.place %></small> <small class="text-muted">時間：<%= story.date %></small></p>
+    </div>
+</div>
+<hr>
+  <% end %>
+
+<br>
+</div>
+</div>
+<div id="createStory" style="background-color:#FFBFB4; padding:10px;">
+  <%= render 'form', story: @story %>
+</div>
+<div id="mapMemory" style="background-color:#FFBFB4; padding:10px;">
+  <div id="map">
+  </div>
+  <%= render 'date_places/form', date_place: @date_place %>
+</div>
+</div>
+
+<div class="back">
+<h2>選單列表</h2>
+</div>
+

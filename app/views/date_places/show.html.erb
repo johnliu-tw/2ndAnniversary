@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lat:</strong>
+  <%= @date_place.lat %>
+</p>
+
+<p>
+  <strong>Lng:</strong>
+  <%= @date_place.lng %>
+</p>
+
+<p>
+  <strong>Place name:</strong>
+  <%= @date_place.place_name %>
+</p>
+
+<%= link_to 'Edit', edit_date_place_path(@date_place) %> |
+<%= link_to 'Back', date_places_path %>

@@ -1,0 +1,22 @@
+
+<%= simple_form_for @story do |f| %>
+  <% if story.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(story.errors.count, "error") %> prohibited this story from being saved:</h2>
+
+      <ul>
+      <% story.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.input :title, label: '標題', required: true%>
+  <%= f.input :description, label: '描述', required: true %>
+  <%= f.input :place, label: '地點', required: true %>
+  <%= f.input :date,as: :date, html5: true, label: '日期', required: true %>
+  <%= f.input :image,as: :file, label: '圖片', required: true %>
+  <%= f.button :submit, "建立故事"%>
+<% end %>
+

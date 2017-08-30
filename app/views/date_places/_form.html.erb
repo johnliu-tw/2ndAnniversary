@@ -1,0 +1,13 @@
+<%= simple_form_for(@date_place) do |f| %>
+  <%= f.error_notification %>
+  <h2>新增地點</h2>  
+  <div class="form-inputs">
+    <%= f.input :lat, label:"緯度" %>
+    <%= f.input :lng, label:"經度" %>
+    <%= f.input :place_name, label:"地點名稱" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "送出"  %>
+  </div>
+<% end %>
