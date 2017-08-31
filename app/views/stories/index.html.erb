@@ -5,6 +5,7 @@
   font-family: 'Baloo Tammudu', cursive;
   border-width: 2px;
   margin:5px;
+  width:30%;
 }
 .back{
   background-color:#FFE1D0;
@@ -30,6 +31,12 @@ body{
 #map {
   height: 400px;
   width: 100%;
+}
+.img-circle{
+  border-radius: 50%;
+}
+.header-text{
+  font-size:18px;
 }
 </style>
 <script>
@@ -61,9 +68,9 @@ body{
     })
   })
   function initMap() {
-    var uluru= {lat: 24.515, lng: 121.360};
+    var uluru= {lat: 24.785, lng: 121.507};
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 7,
+      zoom: 8,
       center: uluru
     });
     var places = []
@@ -87,17 +94,19 @@ body{
 
 <div class="container">
 <div class="row">
-  <div class="col-md-12 col-xs-12">
+  <div class="col-md-12 col-xs-12" style="text-align:center;margin-bottom:15px;">
     <p id="notice"><%= notice %></p>
-    <h1>Stories</h1>
+      <img class="img-circle" src="/john.png" style="width:100px;height:100px">
+      <span class="header-text">Stories</span>
+      <img class="img-circle" src="/sandy.jpg" style="width:100px">
   </div>
-  <div id="storylistCard" class="col-md-4 col-xs-4 header-card rounded">
+  <div id="storylistCard" class="header-card rounded">
     Stories list 
   </div>
-  <div id="createStoryCard" class="col-md-4 col-xs-4 header-card rounded">
+  <div id="createStoryCard" class="header-card rounded">
     Create Story
   </div>
-  <div id="mapMemoryCard"class="col-md-4 col-xs-4 header-card rounded">
+  <div id="mapMemoryCard"class="header-card rounded">
     Story Map
   </div>
 
