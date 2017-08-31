@@ -5,6 +5,6 @@ class Story < ApplicationRecord
     validates_presence_of :title, :description, :place, :date
 private
   def image_size_validation
-    errors[:image] << "要小於 1MB 喲～" if image.size > 1.megabytes
+    errors[:image] << "要小於 3MB 喲～" if image.size > 3.megabytes
   end
 end
