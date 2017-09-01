@@ -30,6 +30,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.3'
+gem 'carrierwave_direct'
 
 gem 'bootstrap', '~> 4.0.0.beta'
 gem 'simple_form'

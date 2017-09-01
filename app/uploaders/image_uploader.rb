@@ -7,7 +7,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  include CarrierWaveDirect::Uploader
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
@@ -47,5 +47,15 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
+  CarrierWave.configure do |config|
+    config.fog_credentials = {
+      :provider               => 'AWS',       # required
+      :aws_access_key_id      => '',       # required
+      :aws_secret_access_key  => '',       # required
+      :region                 => 'Asia Pacific (Tokyo)'  # optional, defaults to 'us-east-1'
+    }
+    config.fog_directory  = '' # required
+    # see https://github.com/jnicklas/carrierwave#using-amazon-s3
+    # for more optional configuration
+  end
 end
